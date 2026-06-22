@@ -1,0 +1,57 @@
+context:
+  version: "0.3.0"
+  build_number: 0
+
+package:
+  name: xtensor-fftw
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xtensor-stack/xtensor-fftw/archive/${{ version }}.tar.gz
+  sha256: d9b32342a93f4471d8e783790cffc0eeda7f12c13047146e4e8ba63ad3651d5d
+
+build:
+  number: ${{ build_number }}
+
+requirements:
+  build:
+    - cmake
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - if: unix
+      then:
+        - make
+  host:
+    - xtensor >=26.0,<27.0
+    - fftw >=3.0
+  run:
+    # xtensor is header-only
+    # it doesn't have a run_exports section
+    - ${{ pin_compatible('xtensor', upper_bound='x.x') }}
+ 
+tests:
+  - package_contents:
+      files:
+        exists:
+          - ${{ "Library/" if win }}include/xtensor-fftw/xtensor-fftw.hpp
+          - ${{ "Library/" if win }}lib/cmake/xtensor-fftw/xtensor-fftwConfig.cmake
+          - ${{ "Library/" if win }}lib/cmake/xtensor-fftw/xtensor-fftwConfigVersion.cmake
+
+about:
+  homepage: http://github.com/xtensor-stack/xtensor-fftw
+  repository: https://github.com/xtensor-stack/xtensor-fftw
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: 'FFTW bindings for xtensor'
+  description: |
+    xtensor-fftw is a header-only library containing FFTW bindings for the
+    xtensor C++ multi-dimensional array library.
+
+extra:
+  recipe-maintainers:
+    - egpbos
+    - SylvainCorlay
+    - JohanMabille
+    - davidbrochart
+    - conda-forge/xtensor
