@@ -22,7 +22,7 @@ requirements:
       then:
         - make
   host:
-    - xtensor >=26.0,<27.0
+    - xtensor >=0.26,<0.27
     - fftw >=3.0
   run:
     # xtensor is header-only
@@ -33,7 +33,7 @@ tests:
   - package_contents:
       files:
         exists:
-          - ${{ "Library/" if win }}include/xtensor-fftw/xtensor-fftw.hpp
+          - ${{ "Library/" if win }}include/xtensor-fftw/xtensor-fftw_config.hpp
           - ${{ "Library/" if win }}lib/cmake/xtensor-fftw/xtensor-fftwConfig.cmake
           - ${{ "Library/" if win }}lib/cmake/xtensor-fftw/xtensor-fftwConfigVersion.cmake
 
