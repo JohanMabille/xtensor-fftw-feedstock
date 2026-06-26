@@ -1,5 +1,5 @@
 context:
-  version: "0.3.0"
+  version: "0.4.0"
   build_number: 0
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/xtensor-stack/xtensor-fftw/archive/${{ version }}.tar.gz
-  sha256: d9b32342a93f4471d8e783790cffc0eeda7f12c13047146e4e8ba63ad3651d5d
+  sha256: 4b7bfb7ff53899b735f693b679370bf986c0371171e3fffff18dd37b1c02a5fd
 
 build:
   number: ${{ build_number }}
@@ -22,7 +22,7 @@ requirements:
       then:
         - make
   host:
-    - xtensor >=0.26,<0.27
+    - xtensor >=0.27,<0.28
     - fftw >=3.0
   run:
     # xtensor is header-only
